@@ -4,24 +4,44 @@ import java.util.TreeSet;
 
 public class PuzzleGrid {
 
-	private int maxXCoordinate;
-	private int maxYCoordinate;
+	private int maxCoordinate;
 	
-	private TreeSet<Queen> queens;
+	private TreeSet<GridSquare> queens;
 	
-	public PuzzleGrid(int x, int y) 
+	public PuzzleGrid(int s) 
 	{
-		this.maxXCoordinate = x;
-		this.maxYCoordinate = y;
+		this.maxCoordinate = s;
 		
-		queens = new TreeSet<Queen>();
+		queens = new TreeSet<GridSquare>();
 	}
 	
 	public boolean addQueen(Queen queen)
 	{
-		if (queen.getY() <= maxYCoordinate && queen.getY() > 0 && queen.getX() <= maxXCoordinate && queen.getX() > 0)
+		if (queen.getY() <= maxCoordinate && queen.getY() > 0 && queen.getX() <= maxCoordinate && queen.getX() > 0)
+		{
+			invalidateSquares(queen);
 			return queens.add(queen);
+		}
 		else
 			return false;
+	}
+	
+	public boolean removeQueen(Queen queen)
+	{
+		for (GridSquare s : queens)
+		{
+			if (s.getClass() == InvalidSquare.class && ((InvalidSquare) s).getParentQueen() == queen)
+				queens.remove(s);
+		}
+		return queens.remove(queen);
+	}
+	
+	private void invalidateSquares(Queen queen)
+	{
+		for (int i = 0; i < maxCoordinate; i++)
+		{
+			queens.add(new InvalidSquare(i, queen.y, queen));
+			queens.add(new InvalidSquare(queen.x, i, queen));
+		}
 	}
 }

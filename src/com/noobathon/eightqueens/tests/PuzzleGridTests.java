@@ -8,13 +8,13 @@ import org.easymock.EasyMockSupport;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.noobathon.eightqueens.GridSquare;
 import com.noobathon.eightqueens.PuzzleGrid;
 import com.noobathon.eightqueens.Queen;
 
 public class PuzzleGridTests extends EasyMockSupport
 {
-	private final static int X_GRID_SIZE = 8;
-	private final static int Y_GRID_SIZE = 8;
+	private final static int S_GRID_SIZE = 8;
 	
 	private Queen queen, queen2;
 	private PuzzleGrid grid;
@@ -22,7 +22,7 @@ public class PuzzleGridTests extends EasyMockSupport
 	@Before
 	public void setup()
 	{
-		grid = new PuzzleGrid(X_GRID_SIZE, Y_GRID_SIZE);
+		grid = new PuzzleGrid(S_GRID_SIZE);
 		queen = createNiceMock(Queen.class);
 		queen2 = createNiceMock(Queen.class);
 	}
@@ -43,7 +43,7 @@ public class PuzzleGridTests extends EasyMockSupport
 	}
 	
 	private void givenThatQueenIsNotAlreadyInSet() {
-		EasyMock.expect(queen.compareTo((Queen) EasyMock.anyObject())).andStubReturn(-1);
+		EasyMock.expect(queen.compareTo(EasyMock.<GridSquare>anyObject())).andStubReturn(new Integer(-1));
 	}
 	
 	@Test
@@ -59,6 +59,7 @@ public class PuzzleGridTests extends EasyMockSupport
 	{
 		EasyMock.expect(queen.getX()).andStubReturn(1.0);
 		EasyMock.expect(queen.getY()).andStubReturn(1.0);
+		EasyMock.expect(queen.compareTo(EasyMock.<GridSquare>anyObject())).andStubReturn(new Integer(-1));
 		
 		EasyMock.expect(queen2.getX()).andStubReturn(1.0);
 		EasyMock.expect(queen2.getY()).andStubReturn(1.0);

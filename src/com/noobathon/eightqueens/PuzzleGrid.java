@@ -45,8 +45,32 @@ public class PuzzleGrid {
 		{
 			queens.add(new InvalidSquare(i, queen.y, queen));
 			queens.add(new InvalidSquare(queen.x, i, queen));
-			//add diagonals
+			
+			if (coordinateIsInGrid(queen.x - i, queen.y - i))
+			{
+				queens.add(new InvalidSquare(queen.x - i, queen.y - i, queen));
+			}
+			
+			if (coordinateIsInGrid(queen.x + i, queen.y + i))
+			{
+				queens.add(new InvalidSquare(queen.x + i, queen.y + i, queen));
+			}
+			
+			if (coordinateIsInGrid(queen.x - i, queen.y + i))
+			{
+				queens.add(new InvalidSquare(queen.x - i, queen.y + i, queen));
+			}
+			
+			if (coordinateIsInGrid(queen.x + i, queen.y - i))
+			{
+				queens.add(new InvalidSquare(queen.x + i, queen.y - i, queen));
+			}
 		}
+	}
+	
+	private boolean coordinateIsInGrid(int x, int y)
+	{
+		return x >= 0 && x < maxCoordinate && y >= 0 && y < maxCoordinate;
 	}
 	
 	public boolean isSolutionFound()

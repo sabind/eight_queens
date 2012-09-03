@@ -94,13 +94,11 @@ public class PuzzleGridTests extends EasyMockSupport
 	}
 	
 	@Test
-	public void canNotAddQueenOnInvalidSquare()
+	public void canNotAddQueenOnInvalidSquareVertical()
 	{
 		givenThatAQueenIsTopLeft();
 		givenThatQueenIsNotAlreadyInSet(queen);
-		//Adding a queen on at the bottom left should fail
 		givenThatSecondQueenIsBottomLeft();
-		givenThatQueenIsNotAlreadyInSet(queen2);
 		replayAll();
 		assertTrue(grid.addQueen(queen));
 		assertFalse(grid.addQueen(queen2));
@@ -116,5 +114,73 @@ public class PuzzleGridTests extends EasyMockSupport
 	{
 		EasyMock.expect(queen2.getX()).andStubReturn(0.0);
 		EasyMock.expect(queen2.getY()).andStubReturn(7.0);
+	}
+	
+	@Test
+	public void canNotAddQueenOnInvalidSquareHorizontal()
+	{
+		givenThatAQueenIsTopLeft();
+		givenThatQueenIsNotAlreadyInSet(queen);
+		givenThatSecondQueenIsTopRight();
+		replayAll();
+		assertTrue(grid.addQueen(queen));
+		assertFalse(grid.addQueen(queen2));
+	}
+
+	private void givenThatSecondQueenIsTopRight() 
+	{
+		EasyMock.expect(queen2.getX()).andStubReturn(7.0);
+		EasyMock.expect(queen2.getY()).andStubReturn(0.0);
+	}
+	
+	@Test
+	public void canNotAddQueenOnInvalidSquareDiagonalIdentity()
+	{
+		givenThatAQueenIsTopLeft();
+		givenThatQueenIsNotAlreadyInSet(queen);
+		givenThatSecondQueenIsBottomRight();
+		replayAll();
+		assertTrue(grid.addQueen(queen));
+		assertFalse(grid.addQueen(queen2));
+	}
+
+	private void givenThatSecondQueenIsBottomRight() 
+	{
+		EasyMock.expect(queen2.getX()).andStubReturn(7.0);
+		EasyMock.expect(queen2.getY()).andStubReturn(7.0);
+	}
+	
+	@Test
+	public void canNotAddQueenOnInvalidSquareDiagonalAboveRightNonIdentity()
+	{
+		givenThatQueenIsInBounds();
+		givenThatQueenIsNotAlreadyInSet(queen);
+		givenThatQueenIsDiagonallyAboveToTheRight();
+		replayAll();
+		assertTrue(grid.addQueen(queen));
+		assertFalse(grid.addQueen(queen2));
+	}
+
+	private void givenThatQueenIsDiagonallyAboveToTheRight() 
+	{
+		EasyMock.expect(queen2.getX()).andStubReturn(2.0);
+		EasyMock.expect(queen2.getY()).andStubReturn(0.0);
+	}
+	
+	@Test
+	public void canNotAddQueenOnInvalidSquareDiagonalBelowLeftNonIdentity()
+	{
+		givenThatQueenIsInBounds();
+		givenThatQueenIsNotAlreadyInSet(queen);
+		givenThatQueenIsDiagonallyBelowToTheLeft();
+		replayAll();
+		assertTrue(grid.addQueen(queen));
+		assertFalse(grid.addQueen(queen2));
+	}
+
+	private void givenThatQueenIsDiagonallyBelowToTheLeft() 
+	{
+		EasyMock.expect(queen2.getX()).andStubReturn(0.0);
+		EasyMock.expect(queen2.getY()).andStubReturn(2.0);
 	}
 }

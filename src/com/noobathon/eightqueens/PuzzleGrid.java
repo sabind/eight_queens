@@ -9,6 +9,7 @@ public class PuzzleGrid {
 	
 	private TreeSet<GridSquare> queens;
 	
+	
 	public PuzzleGrid(int s) 
 	{
 		this.maxCoordinate = s;
@@ -76,5 +77,39 @@ public class PuzzleGrid {
 	public boolean isSolutionFound()
 	{
 		return numQueens == maxCoordinate;
+	}
+	
+	public String toString()
+	{
+		String rtn ="  ";
+		for (int i = 0; i < maxCoordinate; ++i)
+			rtn += i + " ";
+		rtn += "\n";
+		
+		String[][] solutionSpace = new String[maxCoordinate][maxCoordinate];
+		
+		for (GridSquare square : queens)
+		{
+			if (square.getClass() == Queen.class)
+				solutionSpace[square.x][square.y] = "Q";
+			else if(square.getClass() == InvalidSquare.class)
+				solutionSpace[square.x][square.y] ="X";
+		}
+		
+		for (int i = 0; i < maxCoordinate; ++i)
+		{
+			rtn += i + " ";
+			for (int k = 0; k < maxCoordinate; ++k)
+			{
+				if (solutionSpace[k][i] == null)
+					rtn += "-";
+				else
+					rtn += solutionSpace[k][i];
+				rtn += " ";
+			}
+			rtn +="\n";
+		}
+		
+		return rtn;
 	}
 }

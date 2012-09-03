@@ -31,7 +31,7 @@ public class PuzzleGridTests extends EasyMockSupport
 	public void canAddQueenIfFitsInGrid()
 	{
 		givenThatQueenIsInBounds();
-		givenThatQueenIsNotAlreadyInSet();
+		givenThatQueenIsNotAlreadyInSet(queen);
 		replayAll();
 		assertTrue(grid.addQueen(queen));
 	}
@@ -42,7 +42,7 @@ public class PuzzleGridTests extends EasyMockSupport
 		EasyMock.expect(queen.getY()).andStubReturn(1.0);
 	}
 	
-	private void givenThatQueenIsNotAlreadyInSet() {
+	private void givenThatQueenIsNotAlreadyInSet(Queen queen) {
 		EasyMock.expect(queen.compareTo(EasyMock.<GridSquare>anyObject())).andStubReturn(new Integer(-1));
 	}
 	
@@ -91,5 +91,30 @@ public class PuzzleGridTests extends EasyMockSupport
 	{
 		EasyMock.expect(queen.getX()).andStubReturn(9.0);
 		EasyMock.expect(queen.getY()).andStubReturn(9.0);
+	}
+	
+	@Test
+	public void canNotAddQueenOnInvalidSquare()
+	{
+		givenThatAQueenIsTopLeft();
+		givenThatQueenIsNotAlreadyInSet(queen);
+		//Adding a queen on at the bottom left should fail
+		givenThatSecondQueenIsBottomLeft();
+		givenThatQueenIsNotAlreadyInSet(queen2);
+		replayAll();
+		assertTrue(grid.addQueen(queen));
+		assertFalse(grid.addQueen(queen2));
+	}
+
+	private void givenThatAQueenIsTopLeft() 
+	{
+		EasyMock.expect(queen.getX()).andStubReturn(0.0);
+		EasyMock.expect(queen.getX()).andStubReturn(0.0);
+	}
+	
+	private void givenThatSecondQueenIsBottomLeft()
+	{
+		EasyMock.expect(queen2.getX()).andStubReturn(0.0);
+		EasyMock.expect(queen2.getY()).andStubReturn(7.0);
 	}
 }

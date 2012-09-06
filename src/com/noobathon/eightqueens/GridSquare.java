@@ -16,21 +16,23 @@ public class GridSquare extends Point implements Comparable<GridSquare>
 		super(x, y);
 	}
 	
+	@Override
 	public int compareTo(GridSquare square)
 	{
-		if (getX() == square.getX() && getY() == square.getY())
+		if (this.x == square.x && this.y == square.y)
 			return 0;
 		else
 			return 1;
 	}
 	
+	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
-	
+
 	public boolean equals(GridSquare square) 
 	{
-		return super.equals(square);
+		return this.x == square.x && this.y == square.y;
 	}
 }

@@ -14,16 +14,16 @@ public class PuzzleGrid {
 	{
 		this.maxCoordinate = s;
 		numQueens = 0;
-		queens = new TreeSet<GridSquare>();
+		queens = new TreeSet<GridSquare>(new SquareComparator());
 	}
 	
 	public boolean addQueen(Queen queen)
 	{
-		if (queen.getY() < maxCoordinate && queen.getY() >= 0 && queen.getX() < maxCoordinate && queen.getX() >= 0)
+		if (queen.getY() < maxCoordinate && queen.getY() >= 0 && queen.getX() < maxCoordinate && queen.getX() >= 0 && queens.add(queen))
 		{
 			invalidateSquares(queen);
 			numQueens++;
-			return queens.add(queen);
+			return true;
 		}
 		else
 			return false;
@@ -44,8 +44,11 @@ public class PuzzleGrid {
 	{
 		for (int i = 0; i < maxCoordinate; i++)
 		{
-			queens.add(new InvalidSquare(i, queen.y, queen));
-			queens.add(new InvalidSquare(queen.x, i, queen));
+			if (queen.x != i)
+				queens.add(new InvalidSquare(i, queen.y, queen));
+			
+			if (queen.y != i)
+				queens.add(new InvalidSquare(queen.x, i, queen));
 			
 			if (coordinateIsInGrid(queen.x - i, queen.y - i))
 			{

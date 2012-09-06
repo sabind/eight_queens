@@ -8,8 +8,8 @@ public class InvalidSquare extends GridSquare implements Comparable<GridSquare>
 	
 	private Queen parentQueen;
 	
-	public InvalidSquare(int x, int y, Queen queen) {
-		super(x, y);
+	public InvalidSquare(double x, double y, Queen queen) {
+		super((int)x, (int)y);
 		this.parentQueen = queen;
 	}
 

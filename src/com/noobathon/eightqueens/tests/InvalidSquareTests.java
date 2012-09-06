@@ -30,7 +30,7 @@ public class InvalidSquareTests extends EasyMockSupport
 	}
 	
 	@Test
-	public void queenPositionXAndYCoordinatesAreAccurate()
+	public void squarePositionXAndYCoordinatesAreAccurate()
 	{
 		assertEquals(0, (int) square.getX());
 		assertEquals(1, (int) square.getY());

@@ -3,7 +3,6 @@ package com.noobathon.eightqueens.tests;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.easymock.EasyMockSupport;
 import org.junit.Before;
 import org.junit.Test;
 

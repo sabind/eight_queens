@@ -1,20 +1,20 @@
 package com.noobathon.eightqueens;
 
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class PuzzleGrid {
 
 	private int maxCoordinate;
 	private int numQueens;
 	
-	private TreeSet<GridSquare> queens;
+	private HashSet<GridSquare> queens;
 	
 	
 	public PuzzleGrid(int s) 
 	{
 		this.maxCoordinate = s;
 		numQueens = 0;
-		queens = new TreeSet<GridSquare>(new SquareComparator());
+		queens = new HashSet<GridSquare>();
 	}
 	
 	public boolean addQueen(Queen queen)
@@ -50,22 +50,22 @@ public class PuzzleGrid {
 			if (queen.y != i)
 				queens.add(new InvalidSquare(queen.x, i, queen));
 			
-			if (coordinateIsInGrid(queen.x - i, queen.y - i))
+			if (coordinateIsInGrid(queen.x - i, queen.y - i) && i != 0)
 			{
 				queens.add(new InvalidSquare(queen.x - i, queen.y - i, queen));
 			}
 			
-			if (coordinateIsInGrid(queen.x + i, queen.y + i))
+			if (coordinateIsInGrid(queen.x + i, queen.y + i) && i != 0)
 			{
 				queens.add(new InvalidSquare(queen.x + i, queen.y + i, queen));
 			}
 			
-			if (coordinateIsInGrid(queen.x - i, queen.y + i))
+			if (coordinateIsInGrid(queen.x - i, queen.y + i) && i != 0)
 			{
 				queens.add(new InvalidSquare(queen.x - i, queen.y + i, queen));
 			}
 			
-			if (coordinateIsInGrid(queen.x + i, queen.y - i))
+			if (coordinateIsInGrid(queen.x + i, queen.y - i) && i != 0)
 			{
 				queens.add(new InvalidSquare(queen.x + i, queen.y - i, queen));
 			}

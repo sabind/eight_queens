@@ -2,7 +2,7 @@ package com.noobathon.eightqueens;
 
 import java.awt.Point;
 
-public class Queen extends GridSquare implements Comparable<GridSquare>
+public class Queen extends GridSquare
 {
 	private static final long serialVersionUID = 9168110980389974856L;
 	

@@ -2,7 +2,7 @@ package com.noobathon.eightqueens;
 
 import java.awt.Point;
 
-public class InvalidSquare extends GridSquare implements Comparable<GridSquare>
+public class InvalidSquare extends GridSquare
 {
 	private static final long serialVersionUID = -6642784888748013967L;
 	

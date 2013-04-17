@@ -1,4 +1,4 @@
-package com.noobathon.eightqueens.tests;
+package test.noobathon.eightqueens;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
